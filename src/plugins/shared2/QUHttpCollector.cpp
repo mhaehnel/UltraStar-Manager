@@ -53,6 +53,7 @@ void QUHttpCollector::collect() {
 	//http()->setHost(url->host());
 	//http()->get(url->request(), buffer());
 	QNetworkRequest request(QUrl(url->request()));
+	request.setRawHeader("User-Agent", "Ultrastar Manager");
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 	manager()->get(request);
 
@@ -80,6 +81,7 @@ void QUHttpCollector::processNetworkReply(QNetworkReply* reply) {
 	if(reply->error() != QNetworkReply::NoError) {
 		setState(Idle);
 		communicator()->send(reply->errorString());
+		song()->log(tr("[QUHttpCollector] errorString = ")+reply->errorString(),QU::Error);
 		communicator()->send(QUCommunicatorInterface::Failed);
 		return;
 	}
@@ -88,9 +90,10 @@ void QUHttpCollector::processNetworkReply(QNetworkReply* reply) {
 		song()->log(tr("[QUHttpCollector] processNetworkReply(), state() = ") + QString::number(state()), QU::Help);
 		buffer()->setData(reply->readAll());
 		processSearchResults();
-	} else if(state() == ImageRequest)
+	} else if(state() == ImageRequest) {
 		song()->log(tr("[QUHttpCollector] processNetworkReply(), state() = ") + QString::number(state()), QU::Help);
 		processImageResults(reply);
+	}
 }
 
 QFile* QUHttpCollector::openLocalFile(const QString &filePath) {

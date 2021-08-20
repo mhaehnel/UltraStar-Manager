@@ -1,8 +1,8 @@
 #ifndef QUCOVERMODEL_H_
 #define QUCOVERMODEL_H_
 
-#define COVER_ICON_WIDTH  64
-#define COVER_ICON_HEIGHT 64
+#define COVER_ICON_WIDTH  256
+#define COVER_ICON_HEIGHT 256
 
 #include <QAbstractListModel>
 

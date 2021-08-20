@@ -1134,7 +1134,7 @@ void QUSongFile::moveAllFiles(const QString &newRelativePath) {
 	QString source = QU::BaseDir.relativeFilePath(_fi.path());
 	QString destination = newRelativePath;
 
-	if(QString::compare(source, destination, Qt::CaseInsensitive) == 0) {
+	if(QString::compare(source, destination, Qt::CaseSensitive) == 0) {
 		logSrv->add(QString(tr("Old path and new path match! Cannot change song path to: \"%1\"")).arg(destination), QU::Warning);
 		return;
 	}

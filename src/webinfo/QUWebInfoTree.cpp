@@ -169,7 +169,7 @@ void QUWebInfoTree::showInformation(QUSongFile *song) {
 	_allmusic->setHidden(true);
 
 	QSettings settings;
-	if(settings.value("cld2Info", QVariant(true)).toBool())
+	if(settings.value("cld2Info", QVariant(false)).toBool())
 		getCld2Information();
 	if(settings.value("swisschartsWebInfo", QVariant(false)).toBool())
 		getSwisschartsInformation();
